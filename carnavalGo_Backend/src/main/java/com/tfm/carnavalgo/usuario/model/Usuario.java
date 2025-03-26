@@ -1,6 +1,9 @@
 package com.tfm.carnavalgo.usuario.model;
 
 import org.springframework.security.core.userdetails.UserDetails;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
@@ -31,6 +34,8 @@ public class Usuario implements UserDetails {
     private String email;
     private String telefono;
     private String username;
+
+    @JsonIgnore
     private String password;
 
     @Enumerated(EnumType.STRING)
