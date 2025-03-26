@@ -30,6 +30,6 @@ public class Agrupacion {
     private String redesSociales;
 
     @ManyToOne
-    @JoinColumn(name = "creado_por")
+    @JoinColumn(name = "creado_por", nullable = true)
     private Usuario creadoPor;
 }

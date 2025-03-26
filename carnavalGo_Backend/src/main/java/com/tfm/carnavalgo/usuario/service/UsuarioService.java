@@ -42,5 +42,9 @@ public class UsuarioService {
             return usuarioRepository.save(actual);
         }).orElse(null);
     }
+
+    public Optional<Usuario> getUsuarioPorUsername(String username) {
+        return usuarioRepository.findByUsername(username);
+    }
     
 }

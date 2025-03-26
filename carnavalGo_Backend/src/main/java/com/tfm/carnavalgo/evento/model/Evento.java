@@ -25,8 +25,8 @@ public class Evento {
 
     private String localizacion;
 
-    private Long agrupacion; // ID de la agrupación (puede ser null)
+    private Long agrupacion; 
 
     @Column(name = "creado_por")
-    private Long creadoPor; // ID del usuario que creó el evento
+    private Long creadoPor; 
 }

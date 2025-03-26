@@ -16,9 +16,9 @@ public class Ubicacion {
 
     private String lugar;
 
-    private String coordenadas; // Ejemplo: "36.5271,-6.2886"
+    private String coordenadas; 
 
-    private Long evento; // ID del evento relacionado (opcional)
+    private Long evento;
 
-    private Long agrupacion; // ID de agrupación que actúa en esa ubicación (opcional)
+    private Long agrupacion;
 }
