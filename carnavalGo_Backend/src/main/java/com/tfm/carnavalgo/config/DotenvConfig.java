@@ -7,8 +7,11 @@ import io.github.cdimascio.dotenv.Dotenv;
 
 @Configuration
 public class DotenvConfig {
+    
     @Bean
     public Dotenv dotenv() {
         return Dotenv.load();
     }
 }
+
+
