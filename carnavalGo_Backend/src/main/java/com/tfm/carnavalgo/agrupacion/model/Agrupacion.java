@@ -15,9 +15,15 @@ public class Agrupacion {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    private String agrupacion;
     private String imagen;
+
+    @Column(nullable = false)
+    private String agrupacion;
+
+    @Column(nullable = false)
     private String modalidad;
+
+    @Column(nullable = false)
     private String autor;
 
     @Column(columnDefinition = "TEXT")
@@ -26,10 +32,10 @@ public class Agrupacion {
     @Column(columnDefinition = "TEXT")
     private String historia;
 
-    @Column(name = "redes_sociales")
+    @Column(name = "redes_sociales", columnDefinition = "TEXT")
     private String redesSociales;
 
-    @ManyToOne
-    @JoinColumn(name = "creado_por", nullable = true)
+    @ManyToOne(optional = false)
+    @JoinColumn(name = "creado_por", nullable = false)
     private Usuario creadoPor;
 }

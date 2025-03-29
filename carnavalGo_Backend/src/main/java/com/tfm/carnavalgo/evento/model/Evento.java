@@ -17,16 +17,19 @@ public class Evento {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String titulo;
 
+    @Column(nullable = false)
     private LocalDate fecha;
 
     private LocalTime hora;
 
     private String localizacion;
 
+    @Column(nullable = false)
     private Long agrupacion; 
 
-    @Column(name = "creado_por")
+    @Column(name = "creado_por", nullable = false)
     private Long creadoPor; 
 }

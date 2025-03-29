@@ -16,7 +16,11 @@ public class Ubicacion {
 
     private String lugar;
 
-    private String coordenadas; 
+    @Column(nullable = false)
+    private String latitud;
+    
+    @Column(nullable = false)
+    private String longitud;
 
     private Long evento;
 

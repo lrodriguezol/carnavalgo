@@ -22,11 +22,11 @@ public class Comentario {
     private String comentario;
 
     @ManyToOne
-    @JoinColumn(name = "autor_id")
+    @JoinColumn(name = "autor_id", nullable = false)
     private Usuario autor;
 
     @ManyToOne
-    @JoinColumn(name = "relacionado_con")
+    @JoinColumn(name = "relacionado_con", nullable = false)
     private Agrupacion relacionadoCon;
 
     private LocalDate fecha;

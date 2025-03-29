@@ -33,7 +33,8 @@ public class UbicacionService {
     public Ubicacion updateUbicacion(Long id, Ubicacion nueva) {
         return repository.findById(id).map(actual -> {
             actual.setLugar(nueva.getLugar());
-            actual.setCoordenadas(nueva.getCoordenadas());
+            actual.setLatitud(nueva.getLatitud());
+            actual.setLongitud(nueva.getLongitud());
             actual.setEvento(nueva.getEvento());
             actual.setAgrupacion(nueva.getAgrupacion());
             return repository.save(actual);

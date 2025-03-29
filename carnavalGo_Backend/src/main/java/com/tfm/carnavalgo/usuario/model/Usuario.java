@@ -28,17 +28,28 @@ public class Usuario implements UserDetails {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Column(nullable = false)
     private String nombre;
+
+    @Column(nullable = false)
     private String apellido1;
+
     private String apellido2;
+    
+    @Column(nullable = false)
     private String email;
+    
     private String telefono;
+
+    @Column(nullable = false)
     private String username;
 
     @JsonIgnore
+    @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
+    @Column(nullable = false)
     private Rol rol;
 
     @Override
