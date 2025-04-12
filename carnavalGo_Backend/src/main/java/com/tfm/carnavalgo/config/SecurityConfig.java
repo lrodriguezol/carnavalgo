@@ -32,42 +32,41 @@ public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         .cors(cors -> cors.configurationSource(corsConfigurationSource()))
         .authorizeHttpRequests(auth -> auth
 
-            // Endpoints públicos
+            // Endpoints públicos (accesibles sin autenticación)
             .requestMatchers(HttpMethod.GET, "/api/**").permitAll()
             .requestMatchers("/api/auth/**").permitAll()
+            .requestMatchers(HttpMethod.POST, "/api/usuarios").permitAll()
             .requestMatchers("/api/usuarios/create").permitAll()
 
-            // Agrupaciones
+            // Permisos Agrupaciones
             .requestMatchers(HttpMethod.POST, "/api/agrupaciones/**").hasAnyAuthority("POSTULANTE", "ADMINISTRADOR")
             .requestMatchers(HttpMethod.PUT, "/api/agrupaciones/**").hasAnyAuthority("POSTULANTE", "ADMINISTRADOR")
 
-            // Eventos
-            .requestMatchers(HttpMethod.POST, "/api/eventos/**").hasAnyAuthority("POSTULANTE", "ADMINISTRADOR")
+            // Permisos Eventos
+            .requestMatchers(HttpMethod.POST, "/api/eventos/**").hasAnyAuthority("ADMINISTRADOR")
             .requestMatchers(HttpMethod.PUT, "/api/eventos/**").hasAuthority("ADMINISTRADOR")
 
-            // Ubicaciones
+            // Permisos Ubicaciones
             .requestMatchers(HttpMethod.POST, "/api/ubicaciones/**").hasAnyAuthority("POSTULANTE", "ADMINISTRADOR")
             .requestMatchers(HttpMethod.PUT, "/api/ubicaciones/**").hasAnyAuthority("POSTULANTE", "ADMINISTRADOR")
 
-            // Encuestas
+            // Permisos Encuestas
             .requestMatchers(HttpMethod.POST, "/api/encuestas/**").hasAuthority("ADMINISTRADOR")
 
-            // Comentarios
+            // Permisos Comentarios
             .requestMatchers(HttpMethod.POST, "/api/comentarios/**").hasAnyAuthority("AFICIONADO", "ADMINISTRADOR")
             .requestMatchers(HttpMethod.DELETE, "/api/comentarios/**").hasAuthority("ADMINISTRADOR")
 
+            // Para cualquier otra petición se requiere autenticación
             .anyRequest().authenticated()
         )
-        .sessionManagement(session -> session
-            .sessionCreationPolicy(SessionCreationPolicy.STATELESS))
-        .authenticationProvider(authProvider)
-        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class)
-        .build();
+        .sessionManagement(session -> session.sessionCreationPolicy(SessionCreationPolicy.STATELESS)).authenticationProvider(authProvider)
+        .addFilterBefore(jwtAuthenticationFilter, UsernamePasswordAuthenticationFilter.class).build();
 }
 
     private UrlBasedCorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration configuration = new CorsConfiguration();
-        configuration.setAllowedOrigins(List.of("http://localhost:4200"));  // Cambiar esto en PRO
+        configuration.setAllowedOrigins(List.of("http://localhost:4200"));  // Cambiar en PRO por la url de netlify donde esta desplegado
         configuration.setAllowedMethods(List.of("GET", "POST", "PUT", "DELETE", "OPTIONS"));
         configuration.setAllowedHeaders(List.of("*"));
         configuration.setAllowCredentials(true);

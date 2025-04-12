@@ -44,12 +44,11 @@ public class Usuario implements UserDetails {
     @Column(nullable = false)
     private String username;
 
-    @JsonIgnore
     @Column(nullable = false)
     private String password;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column(name = "rol", nullable = false)
     private Rol rol;
 
     @Override

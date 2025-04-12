@@ -3,6 +3,7 @@ package com.tfm.carnavalgo.usuario.service;
 import com.tfm.carnavalgo.usuario.model.Usuario;
 import com.tfm.carnavalgo.usuario.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 import java.util.List;
 import java.util.Optional;
@@ -12,6 +13,9 @@ public class UsuarioService {
 
     @Autowired
     private UsuarioRepository usuarioRepository;
+    
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public List<Usuario> getAllUsuarios() {
         return usuarioRepository.findAll();
@@ -22,13 +26,15 @@ public class UsuarioService {
     }
 
     public Usuario saveUsuario(Usuario usuario) {
+        usuario.setPassword(passwordEncoder.encode(usuario.getPassword()));
         return usuarioRepository.save(usuario);
     }
-
+    
     public void deleteUsuario(Long id) {
         usuarioRepository.deleteById(id);
     }
 
+    //Actualización del usuario modificado
     public Usuario updateUsuario(Long id, Usuario nuevo) {
         return usuarioRepository.findById(id).map(actual -> {
             actual.setNombre(nuevo.getNombre());

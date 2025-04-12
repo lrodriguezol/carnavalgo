@@ -25,18 +25,24 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    //Validación de credenciales y devolución del token JWT
     @PostMapping("/login")
     public ResponseEntity<AuthResponse> login(@RequestBody LoginRequest loginRequest) {
+        
+        //Recuperamos el usuario
         Optional<Usuario> usuario = usuarioService.getUsuarioPorUsername(loginRequest.getUsername());
 
         if (usuario.isEmpty()) {
             System.out.println("Usuario no encontrado: " + loginRequest.getUsername());
         }
 
+        //Verificación de la contraseña del usuario
         if (usuario.isPresent() && passwordEncoder.matches(loginRequest.getPassword(), usuario.get().getPassword())) {
             System.out.println("Usuario autenticado: " + loginRequest.getUsername());
+
+            //Se genera el token JWT
             String token = jwtService.generateToken(usuario.get(), usuario.get().getId());
-            return ResponseEntity.ok(new AuthResponse(token, usuario.get().getRol().toString()));
+            return ResponseEntity.ok(new AuthResponse(token, usuario.get().getRol().toString(), usuario.get()));
         }
 
         System.out.println("Fallo en la autenticación para usuario: " + loginRequest.getUsername());

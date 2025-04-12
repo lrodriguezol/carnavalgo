@@ -22,41 +22,43 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    @Autowired
-    private Dotenv dotenv;
+    @Autowired(required = false) // Pude ser 'null' en producción
+    Dotenv dotenv;
+
+    private String getEnvVariable(String key) {
+        if (dotenv != null && dotenv.get(key) != null) {
+            return dotenv.get(key);
+        } else {
+            return System.getenv(key);
+        }
+    }
 
     private Key getSigningKey() {
-        String secretKey = dotenv.get("JWT_SECRET_KEY");
+        String secretKey = getEnvVariable("JWT_SECRET_KEY");
         byte[] keyBytes = Decoders.BASE64.decode(secretKey);
         return Keys.hmacShaKeyFor(keyBytes);
     }
-
-    // Extrae todos los claims del token
+    
     public Claims extractAllClaims(String token) {
-        return Jwts.parserBuilder()
-                   .setSigningKey(getSigningKey())
-                   .build()
-                   .parseClaimsJws(token)
-                   .getBody();
+        return Jwts.parserBuilder().setSigningKey(getSigningKey()).build().parseClaimsJws(token).getBody();
     }
 
-    // Extrae un claim personalizado
     public <T> T extractClaim(String token, Function<Claims, T> claimsResolver) {
         final Claims claims = extractAllClaims(token);
         return claimsResolver.apply(claims);
     }
 
-    // Extrae el nombre de usuario
+    // Extrae el nombre del usuario desde el token
     public String extractUsername(String token) {
         return extractClaim(token, Claims::getSubject);
     }
 
-    // Extrae el rol
+    // Extrae el rol del usuario desde el token
     public String extractRol(String token) {
         return extractClaim(token, claims -> claims.get("rol", String.class));
     }
 
-    // Extrae el ID del usuario
+    // Extrae el ID del usuario desde el token
     public Long extractIdUsuario(String token) {
         return extractClaim(token, claims -> claims.get("idUsuario", Long.class));
     }
@@ -66,7 +68,7 @@ public class JwtService {
         return extractClaim(token, Claims::getExpiration).before(new Date());
     }
 
-    // Valida que el token corresponde al usuario y no ha expirado
+    // Valida si el token es válido
     public boolean isTokenValid(String token, UserDetails userDetails) {
         final String username = extractUsername(token);
         return username.equals(userDetails.getUsername()) && !isTokenExpired(token);
