@@ -75,6 +75,18 @@
       <scope>runtime</scope>
   </dependency>
 
+  <!--Jakarta-->
+  <dependency>
+      <groupId>jakarta.validation</groupId>
+    <artifactId>jakarta.validation-api</artifactId>
+  </dependency>
+
+  <!--Hibernate validator-->
+  <dependency>
+    <groupId>org.hibernate.validator</groupId>
+    <artifactId>hibernate-validator</artifactId>
+  </dependency>
+
     <!-- Devtools para reinicio en caliente -->
     <dependency>
       <groupId>org.springframework.boot</groupId>
