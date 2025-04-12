@@ -1,0 +1,25 @@
+<header class="main-header">
+  <a routerLink="/" class="logo-link" aria-label="Ir a la página principal">
+    <img src="assets/images/carnavalgo_logo.png" alt="CarnavalGo Logo" class="logo-img" />
+  </a>
+
+  <nav class="nav-links">
+    <a class="nav-link" routerLink="/agrupaciones" aria-label="Ir a agrupaciones">Agrupaciones</a>
+    <a class="nav-link" routerLink="/eventos" aria-label="Ir a eventos">Eventos</a>
+    <a class="nav-link" routerLink="/ubicaciones" aria-label="Ir a ubicaciones">Ubicaciones</a>
+
+    <ng-container *ngIf="username; else loginLink">
+      <div class="nav-item user-dropdown" (click)="toggleMenu()" tabindex="0" aria-label="Menú de usuario" aria-haspopup="true" [attr.aria-expanded]="menuAbierto">
+        <span class="nav-link">Hola, {{ username }}</span>
+        <div class="dropdown-menu" *ngIf="menuAbierto">
+          <a (click)="editarPerfil()" aria-label="Editar perfil">Editar perfil</a>
+          <a (click)="logout()" aria-label="Cerrar sesión">Cerrar sesión</a>
+        </div>
+      </div>
+    </ng-container>
+
+    <ng-template #loginLink>
+      <a routerLink="/auth/login" class="nav-link" aria-label="Iniciar sesión">Iniciar sesión</a>
+    </ng-template>
+  </nav>
+</header>

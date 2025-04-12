@@ -1,0 +1,65 @@
+<div class="register-container">
+  <h2>Registro de Usuario</h2>
+
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+    <div class="form-group">
+      <label for="username">Nombre de usuario*</label>
+      <input id="username" type="text" formControlName="username" required />
+      <div *ngIf="campoInvalido('username')" class="error">Campo requerido</div>
+    </div>
+
+    <div class="form-group">
+      <label for="password">Contraseña*</label>
+      <input id="password" type="password" formControlName="password" required />
+      <div *ngIf="campoInvalido('password')" class="error">Mínimo 6 caracteres</div>
+    </div>
+
+    <div class="form-group">
+      <label for="nombre">Nombre*</label>
+      <input id="nombre" type="text" formControlName="nombre" required />
+      <div *ngIf="campoInvalido('nombre')" class="error">Campo requerido</div>
+    </div>
+
+    <div class="form-group">
+      <label for="apellido1">Primer Apellido*</label>
+      <input id="apellido1" type="text" formControlName="apellido1" required />
+      <div *ngIf="campoInvalido('apellido1')" class="error">Campo requerido</div>
+    </div>
+
+    <div class="form-group">
+      <label for="apellido2">Segundo Apellido</label>
+      <input id="apellido2" type="text" formControlName="apellido2" />
+    </div>
+
+    <div class="form-group">
+      <label for="telefono">Teléfono</label>
+      <input id="telefono" type="tel" formControlName="telefono" />
+      <div *ngIf="campoInvalido('telefono')" class="error">Teléfono inválido (9 dígitos)</div>
+    </div>
+
+    <div class="form-group">
+      <label for="email">Correo electrónico*</label>
+      <input id="email" type="email" formControlName="email" required />
+      <div *ngIf="campoInvalido('email')" class="error">Correo inválido</div>
+    </div>
+
+    <div class="form-group row">
+      <label>Rol*</label>
+      <div class="radio-group-inline">
+        <label>
+          <input type="radio" formControlName="rol" value="aficionado" />
+          Aficionado
+        </label>
+        <label>
+          <input type="radio" formControlName="rol" value="postulante" />
+          Postulante
+        </label>
+      </div>
+    </div>
+
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+    <button type="submit" aria-label="Enviar formulario de registro">Registrar</button>
+    <button type="button" (click)="cancel()" aria-label="Cancelar registro">Cancelar</button>
+  </form>
+</div>
