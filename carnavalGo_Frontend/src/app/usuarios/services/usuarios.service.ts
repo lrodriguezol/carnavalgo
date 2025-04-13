@@ -7,7 +7,7 @@ import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
-export class UsuarioService {
+export class UsuariosService {
 
   private apiUrl = `${environment.apiUrl}/usuarios`;
 

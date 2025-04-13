@@ -6,10 +6,11 @@ import { RouterModule } from '@angular/router';
 import { PoliticaCookiesComponent } from './pages/politica-cookies/politica-cookies.component';
 import { PoliticaPrivacidadComponent } from './pages/politica-privacidad/politica-privacidad.component';
 import { ContactoComponent } from './pages/contacto/contacto.component';
+import { AccesoRestringidoComponent } from './pages/acceso-restringido/acceso-restringido.component';
 
 @NgModule({
-  declarations: [HeaderComponent, FooterComponent, PoliticaCookiesComponent, PoliticaPrivacidadComponent, ContactoComponent],
+  declarations: [HeaderComponent, FooterComponent, PoliticaCookiesComponent, PoliticaPrivacidadComponent, ContactoComponent, AccesoRestringidoComponent],
   imports: [CommonModule, RouterModule],
-  exports: [HeaderComponent, FooterComponent]
+  exports: [HeaderComponent, FooterComponent, AccesoRestringidoComponent]
 })
 export class SharedModule {}

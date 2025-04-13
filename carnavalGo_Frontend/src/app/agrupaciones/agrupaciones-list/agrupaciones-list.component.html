@@ -1,0 +1,33 @@
+<div class="listado-container">
+    <h1 class="titulo">Agrupaciones</h1>
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+  
+   <div class="buscador">
+      <input type="text" [(ngModel)]="busqueda" (input)="buscar()" placeholder="Buscar agrupaciones..."/>
+    </div>
+  
+    <div class="grid">
+      <div *ngFor="let agrupacion of filtradas" class="tarjeta">
+        <img [src]="agrupacion.imagen" alt="Imagen de la agrupación" />
+        <h3>{{ agrupacion.agrupacion }}</h3>
+        <p><strong>Modalidad:</strong> {{ agrupacion.modalidad }}</p>
+        <p><strong>Autor:</strong> {{ agrupacion.autor }}</p>
+        <a [routerLink]="['/agrupaciones', agrupacion.id]"  aria-label="Ver detalle de la agrupación">Detalle</a>
+      </div>
+    </div>
+
+    <div class="paginacion">
+      <button (click)="cambiarPagina(paginaActual - 1)" [disabled]="paginaActual === 1" aria-label="Página anterior">⟨</button>
+    
+      <button *ngFor="let pagina of [].constructor(totalPaginas); let i = index" (click)="cambiarPagina(i + 1)" [class.activa]="paginaActual === i + 1" [attr.aria-label]="'Ir a la página ' + (i + 1)">
+        {{ i + 1 }}
+      </button>
+    
+      <button (click)="cambiarPagina(paginaActual + 1)" [disabled]="paginaActual === totalPaginas" aria-label="Página siguiente"></button>
+    </div>
+
+    <div class="crear-agrupacion" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
+      <button class="btn" (click)="irACrearAgrupacion()" aria-label="Añadir nueva agrupación">Añadir agrupación</button>
+    </div>
+</div>
+  

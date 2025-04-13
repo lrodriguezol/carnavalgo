@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
 import { AuthService } from '../../auth/services/auth.service';
-import { UsuarioService } from '../services/usuario.service';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-editar-perfil',
@@ -17,7 +17,7 @@ export class EditarPerfilComponent {
   errorMsg: string | null = null;
   esAdmin: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,   private usuarioService: UsuarioService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,   private usuariosService: UsuariosService) {}
 
   ngOnInit(): void {
     
@@ -64,7 +64,7 @@ export class EditarPerfilComponent {
         rol: this.editarForm.value.rol.toUpperCase()
       };
     
-      this.usuarioService.updateUsuario(usuario.id, datosActualizados).subscribe({
+      this.usuariosService.updateUsuario(usuario.id, datosActualizados).subscribe({
         next: (res) => {
           console.log('Perfil actualizado con éxito:', res);
           this.authService.saveUser(res); // Actualiza el usuario almacenado

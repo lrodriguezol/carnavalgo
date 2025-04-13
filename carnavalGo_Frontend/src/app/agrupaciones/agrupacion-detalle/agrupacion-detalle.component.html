@@ -1,0 +1,26 @@
+<div class="detalle-agrupacion-container" *ngIf="agrupacion;">
+  <h1 class="titulo">{{ agrupacion.agrupacion }}</h1>
+
+  <div class="datos-basicos">
+    <p><strong>Modalidad:</strong> {{ agrupacion.modalidad }}</p>
+    <p><strong>Autor:</strong> {{ agrupacion.autor }}</p>
+    <p><strong>Componentes:</strong> {{ agrupacion.componentes }}</p>
+    <p><strong>Redes sociales:</strong> {{ agrupacion.redesSociales }}</p>
+    <p><strong>Historia:</strong></p>
+    <p class="historia">{{ agrupacion.historia }}</p>
+  </div>
+
+  <div class="galeria" *ngIf="agrupacion.imagen">
+    <img [src]="agrupacion.imagen" alt="Imagen de la agrupación" />
+  </div>
+
+  <div class="comentarios">
+    <h2>Comentarios / Encuestas</h2>
+    <p style="color: grey; text-align: center;">(Próximamente...)</p>
+  </div>
+
+  <div class="acciones">
+    <button *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'" class="btn" (click)="editarAgrupacion()" aria-label="Editar agrupación">Editar agrupación</button>
+    <button  *ngIf="userRole === 'ADMINISTRADOR'" class="btn" (click)="anadirEncuesta()" aria-label="Añadir encuesta sobre esta agrupación">Añadir encuesta</button>
+  </div>
+</div>

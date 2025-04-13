@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
-import { UsuarioService } from '../services/usuario.service';
+import { Usuario } from '../models/usuario.model';
+import { UsuariosService } from '../services/usuarios.service';
 
 @Component({
   selector: 'app-registro',
@@ -15,7 +16,7 @@ export class RegistroComponent {
   errorMsg: string | null = null;
   roles: string[] = ['aficionado', 'postulante', 'administrador'];
 
-  constructor(private fb: FormBuilder, private router: Router,private usuarioService: UsuarioService) {
+  constructor(private fb: FormBuilder, private router: Router, private usuariosService: UsuariosService) {
     this.registroForm = this.fb.group({
       nombre: ['', Validators.required],
       apellido1: ['', Validators.required],
@@ -36,12 +37,12 @@ export class RegistroComponent {
       return;
     }
   
-    const usuario = {
+    const usuario: Usuario = {
       ...this.registroForm.value,
       rol: this.registroForm.value.rol.toUpperCase()
     };
   
-    this.usuarioService.registrar(usuario).subscribe({
+    this.usuariosService.registrar(usuario).subscribe({
       next: (res) => {
         this.router.navigate(['/auth/login'], { queryParams: { registrado: 'true' } });
       },
@@ -51,6 +52,7 @@ export class RegistroComponent {
     });
   }
 
+  //Si pulsamos cancelar nos lleva a la Home
   cancel(): void {
     this.router.navigate(['/']);
   }

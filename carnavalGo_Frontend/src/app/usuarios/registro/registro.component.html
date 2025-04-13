@@ -5,7 +5,7 @@
     <div class="form-group">
       <label for="username">Nombre de usuario*</label>
       <input id="username" type="text" formControlName="username" required />
-      <div *ngIf="campoInvalido('username')" class="error">Campo requerido</div>
+      <div *ngIf="campoInvalido('username')" class="error">Campo obligatorio</div>
     </div>
 
     <div class="form-group">
@@ -17,13 +17,13 @@
     <div class="form-group">
       <label for="nombre">Nombre*</label>
       <input id="nombre" type="text" formControlName="nombre" required />
-      <div *ngIf="campoInvalido('nombre')" class="error">Campo requerido</div>
+      <div *ngIf="campoInvalido('nombre')" class="error">Campo obligatorio</div>
     </div>
 
     <div class="form-group">
       <label for="apellido1">Primer Apellido*</label>
       <input id="apellido1" type="text" formControlName="apellido1" required />
-      <div *ngIf="campoInvalido('apellido1')" class="error">Campo requerido</div>
+      <div *ngIf="campoInvalido('apellido1')" class="error">Campo obligatorio</div>
     </div>
 
     <div class="form-group">
@@ -55,6 +55,7 @@
           Postulante
         </label>
       </div>
+      <div *ngIf="campoInvalido('rol')" class="error">Campo obligatorio</div>
     </div>
 
     <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>

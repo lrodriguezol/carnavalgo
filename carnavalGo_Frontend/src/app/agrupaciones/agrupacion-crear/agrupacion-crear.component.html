@@ -1,0 +1,49 @@
+<div class="crear-agrupacion-container">
+  <h2>Añadir Agrupación</h2>
+
+  <form [formGroup]="crearForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="agrupacion">Nombre agrupación*</label>
+      <input id="agrupacion" type="text" formControlName="agrupacion" required />
+      <div *ngIf="campoInvalido('agrupacion')" class="error">Campo obligatorio</div>
+    </div>
+
+    <div class="form-group">
+      <label for="imagen">Imagen (URL)</label>
+      <input id="imagen" type="text" formControlName="imagen" />
+    </div>
+
+    <div class="form-group">
+      <label for="modalidad">Modalidad*</label>
+      <input id="modalidad" type="text" formControlName="modalidad" required />
+      <div *ngIf="campoInvalido('modalidad')" class="error">Campo obligatorio</div>
+    </div>
+
+    <div class="form-group">
+      <label for="autor">Autor*</label>
+      <input id="autor" type="text" formControlName="autor" required />
+      <div *ngIf="campoInvalido('autor')" class="error">Campo obligatorio</div>
+    </div>
+
+    <div class="form-group">
+      <label for="componentes">Componentes</label>
+      <input id="componentes" type="text" formControlName="componentes" />
+    </div>
+
+    <div class="form-group">
+      <label for="historia">Historia</label>
+      <textarea id="historia" rows="4" formControlName="historia"></textarea>
+    </div>
+
+    <div class="form-group">
+      <label for="redesSociales">Redes Sociales</label>
+      <input id="redesSociales" type="text" formControlName="redesSociales" />
+    </div>
+
+    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+
+    <button type="submit" aria-label="Enviar formulario para alta agrupación">Alta Agrupación</button>
+    <button type="button" (click)="cancel()" aria-label="Cancelar alta">Cancelar</button>
+  </form>
+</div>
