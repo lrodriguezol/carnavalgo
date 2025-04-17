@@ -1,0 +1,21 @@
+<div class="ubicaciones-container">
+  
+  <div class="mapa-container">
+    <mgl-map [style]="style" [zoom]="[zoom]" [center]="center" [minZoom]="12" [maxZoom]="18">
+      <mgl-marker *ngFor="let ubicacion of ubicaciones" [lngLat]="[+ubicacion.longitud, +ubicacion.latitud]" (click)="seleccionarUbicacion(ubicacion)">
+      </mgl-marker>
+    </mgl-map>
+  </div>
+
+  <div *ngIf="ubicacionSeleccionada" class="info-ubicacion">
+    <h3>{{ ubicacionSeleccionada.lugar }}</h3>
+    <p>
+      Coordenadas: {{ ubicacionSeleccionada.latitud }} / {{ ubicacionSeleccionada.longitud }}
+    </p>
+  </div>
+
+   <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
+    <button class="btn">Añadir ubicación</button>
+    <button class="btn" [disabled]="!ubicacionSeleccionada" (click)="editarUbicacion()">Editar ubicación</button>
+  </div>
+</div>

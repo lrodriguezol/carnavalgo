@@ -1,0 +1,26 @@
+<div class="eventos-container">
+  <div class="calendario">
+
+    <div class="cal-nav">
+      <button (click)="verMesAnterior()">‹</button>
+      <span>{{ viewDate | date: 'MMMM yyyy' }}</span>
+      <button (click)="verMesSiguiente()">›</button>
+    </div>
+
+    <mwl-calendar-month-view [viewDate]="viewDate" [events]="eventos" (dayClicked)="onDayClick($event.day.date)"></mwl-calendar-month-view>
+  </div>
+
+  <div class="detalle">
+    <h2 *ngIf="eventoSeleccionado">{{ eventoSeleccionado.title }}</h2>
+    <h2 *ngIf="!eventoSeleccionado">Selecciona un día del calendario</h2>
+  
+    <div *ngIf="eventoSeleccionado">
+      <p><strong>Fecha:</strong> {{ eventoSeleccionado.start | date:'fullDate' }}</p>
+    </div>
+  
+    <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR'">
+      <button class="btn" (click)="crearEvento()">Crear evento</button>
+      <button class="btn" *ngIf="eventoSeleccionado" (click)="editarEvento()">Editar evento</button>
+    </div>
+  </div>
+</div>
