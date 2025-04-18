@@ -59,9 +59,11 @@ export class EditarPerfilComponent {
         return;
       }
     
+      const rawValues = this.editarForm.getRawValue();
+
       const datosActualizados = {
-        ...this.editarForm.getRawValue(),
-        rol: this.editarForm.value.rol.toUpperCase()
+        ...rawValues,
+        rol: rawValues.rol?.toUpperCase() ?? ''
       };
     
       this.usuariosService.updateUsuario(usuario.id, datosActualizados).subscribe({
