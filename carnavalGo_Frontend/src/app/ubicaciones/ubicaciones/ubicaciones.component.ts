@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Map, Marker } from 'maplibre-gl';
+import { Inject, PLATFORM_ID } from '@angular/core';
+import { isPlatformBrowser } from '@angular/common';
 import { AuthService } from '../../auth/services/auth.service';
 
 @Component({
@@ -16,9 +17,13 @@ export class UbicacionesComponent implements OnInit {
   userRole: string | null = null;
   ubicacionSeleccionada: any = null;
 
-  constructor(private authService: AuthService) {}
+  isBrowser = false;
 
-  //Datos mockeados para pruebas
+  constructor(private authService: AuthService, @Inject(PLATFORM_ID) private platformId: Object) {
+    this.isBrowser = isPlatformBrowser(this.platformId);
+  }
+
+  //Ubicaciones Mockeadas para pruebas
   ubicaciones = [
     {
       id: 1,

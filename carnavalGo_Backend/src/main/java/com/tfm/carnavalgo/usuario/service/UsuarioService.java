@@ -43,7 +43,7 @@ public class UsuarioService {
             actual.setEmail(nuevo.getEmail());
             actual.setTelefono(nuevo.getTelefono());
             actual.setUsername(nuevo.getUsername());
-            actual.setPassword(nuevo.getPassword());
+            actual.setPassword(passwordEncoder.encode(nuevo.getPassword()));
             actual.setRol(nuevo.getRol());
             return usuarioRepository.save(actual);
         }).orElse(null);

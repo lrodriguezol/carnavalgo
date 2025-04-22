@@ -1,26 +1,36 @@
 <div class="eventos-container">
-  <div class="calendario">
-
-    <div class="cal-nav">
-      <button (click)="verMesAnterior()">‹</button>
-      <span>{{ viewDate | date: 'MMMM yyyy' }}</span>
-      <button (click)="verMesSiguiente()">›</button>
+  <div class="contenido">
+    <div class="calendario">
+      <div class="cal-nav">
+        <button (click)="verMesAnterior()">‹</button>
+        <span>{{ viewDate | date: 'MMMM yyyy' }}</span>
+        <button (click)="verMesSiguiente()">›</button>
+      </div>
+      <mwl-calendar-month-view [viewDate]="viewDate" [events]="eventos" [weekStartsOn]="1" (dayClicked)="onDayClick($event.day.date)"></mwl-calendar-month-view>
     </div>
 
-    <mwl-calendar-month-view [viewDate]="viewDate" [events]="eventos" (dayClicked)="onDayClick($event.day.date)"></mwl-calendar-month-view>
+    <div class="detalle">
+      <ng-template #noEventoSeleccionado>
+        <h2 *ngIf="!fechaSeleccionada">Selecciona un día del calendario</h2>
+        <ng-container *ngIf="fechaSeleccionada">
+          <h2>No existen eventos para el día seleccionado</h2>
+          <p><strong>Fecha:</strong> {{ fechaSeleccionada | date:'fullDate' | titlecase }}</p>
+        </ng-container>
+      </ng-template>
+
+      <ng-container *ngIf="eventoSeleccionado; else noEventoSeleccionado">
+        <h2>Detalles del evento</h2>
+        <p><strong>Título:</strong> {{ eventoSeleccionado.titulo }}</p>
+        <p><strong>Fecha:</strong> {{ eventoSeleccionado.fecha | date:'fullDate' | titlecase }}</p>
+        <p *ngIf="eventoSeleccionado.hora"><strong>Hora:</strong> {{ eventoSeleccionado.hora }}</p>
+        <p *ngIf="eventoSeleccionado.localizacion"><strong>Localización:</strong> {{ eventoSeleccionado.localizacion }}</p>
+        <p *ngIf="eventoSeleccionado.agrupacion"><strong>Agrupación:</strong> {{ agrupacionNombre }}</p>
+      </ng-container>
+    </div>
   </div>
 
-  <div class="detalle">
-    <h2 *ngIf="eventoSeleccionado">{{ eventoSeleccionado.title }}</h2>
-    <h2 *ngIf="!eventoSeleccionado">Selecciona un día del calendario</h2>
-  
-    <div *ngIf="eventoSeleccionado">
-      <p><strong>Fecha:</strong> {{ eventoSeleccionado.start | date:'fullDate' }}</p>
-    </div>
-  
-    <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR'">
-      <button class="btn" (click)="crearEvento()">Crear evento</button>
-      <button class="btn" *ngIf="eventoSeleccionado" (click)="editarEvento()">Editar evento</button>
-    </div>
+  <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
+    <button class="btn" [disabled]="userRole === 'POSTULANTE' || eventoSeleccionado !== null" (click)="crearEvento()" aria-label="Crear evento">Añadir evento</button>
+    <button class="btn" [disabled]="userRole === 'POSTULANTE' || !eventoSeleccionado" (click)="editarEvento()" aria-label="Editar evento">Editar evento</button>
   </div>
 </div>

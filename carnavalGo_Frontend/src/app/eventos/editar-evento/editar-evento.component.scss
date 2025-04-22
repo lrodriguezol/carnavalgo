@@ -1,0 +1,44 @@
+.editEvento-container {
+    max-width: 500px;
+    margin: 2rem auto;
+    padding: 2rem;
+    background-color: #f9f9f9;
+    border-radius: 8px;
+  
+    h2 {
+      color: #6a1b32;
+      margin-bottom: 1rem;
+    }
+  
+    label {
+      display: block;
+      margin: 1rem 0 0.3rem;
+      font-weight: bold;
+      color: #6a1b32;
+    }
+  
+    input {
+      width: 100%;
+      padding: 0.5rem;
+      border: 1px solid #ccc;
+      border-radius: 4px;
+    }
+  
+    button {
+      background-color: #6a1b32;
+      margin-top: 1.5rem;
+      margin-right: 1rem;
+      color: #ecb636;
+      padding: 0.6rem 1.2rem;
+      border: none;
+      border-radius: 4px;
+      font-weight: bold;
+      cursor: pointer;
+      font-size: 1rem;
+  
+      &:hover {
+        background-color: #ecb636;
+        color: #6a1b32;
+      }
+    }
+  }

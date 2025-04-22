@@ -17,7 +17,7 @@ export class EditarPerfilComponent {
   errorMsg: string | null = null;
   esAdmin: boolean = false;
 
-  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router,   private usuariosService: UsuariosService) {}
+  constructor(private fb: FormBuilder, private authService: AuthService, private router: Router, private usuariosService: UsuariosService) {}
 
   ngOnInit(): void {
     

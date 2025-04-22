@@ -18,24 +18,24 @@ export class AuthService {
 
   constructor(private http: HttpClient, private router: Router, @Inject(PLATFORM_ID) private platformId: Object) {
     this.isBrowser = isPlatformBrowser(platformId);
-  
+
     if (this.isBrowser && this.getToken()) {
       const user = this.getUser();
-  
+
       if (user) {
-        // Usuario guardado previamente
         this.loggedIn.next(true);
         this.usernameSubject.next(user.username);
       } else {
-        const payload = JSON.parse(atob(this.getToken()!.split('.')[1]));
-        const reconstructedUser = {
-          username: payload.sub,
-          rol: payload.rol
-        };
-  
-        this.saveUser(reconstructedUser);
-        this.loggedIn.next(true);
-        this.usernameSubject.next(reconstructedUser.username);
+        try {
+          const payload = JSON.parse(atob(this.getToken()!.split('.')[1]));
+          const reconstructedUser = {username: payload.sub, rol: payload.rol,id: payload.idUsuario};
+
+          this.saveUser(reconstructedUser);
+          this.loggedIn.next(true);
+          this.usernameSubject.next(reconstructedUser.username);
+        } catch (e) {
+          this.logout();
+        }
       }
     }
   }
@@ -44,8 +44,8 @@ export class AuthService {
     return this.http.post<{ token: string; rol: string; usuario: any }>(`${environment.apiUrl}/auth/login`, credentials).pipe(
       tap(res => {
         if (this.isBrowser) {
-          localStorage.setItem('jwt', res.token);
-          localStorage.setItem('usuario', JSON.stringify(res.usuario));
+          sessionStorage.setItem('jwt', res.token);
+          sessionStorage.setItem('usuario', JSON.stringify(res.usuario));
 
           this.loggedIn.next(true);
           this.usernameSubject.next(res.usuario.username);
@@ -56,26 +56,26 @@ export class AuthService {
 
   getToken(): string | null {
     if (this.isBrowser) {
-      return localStorage.getItem('jwt');
+      return sessionStorage.getItem('jwt');
     }
     return null;
   }
 
   saveToken(token: string) {
     if (this.isBrowser) {
-      localStorage.setItem('jwt', token);
+      sessionStorage.setItem('jwt', token);
     }
   }
 
   saveUser(user: any) {
     if (this.isBrowser) {
-      localStorage.setItem('usuario', JSON.stringify(user));
+      sessionStorage.setItem('usuario', JSON.stringify(user));
     }
   }
 
   getUser(): any {
     if (this.isBrowser) {
-      const json = localStorage.getItem('usuario');
+      const json = sessionStorage.getItem('usuario');
       return json ? JSON.parse(json) : null;
     }
     return null;
@@ -88,13 +88,12 @@ export class AuthService {
 
   logout() {
     if (this.isBrowser) {
-      localStorage.removeItem('jwt');
-      localStorage.removeItem('usuario');
+      sessionStorage.removeItem('jwt');
+      sessionStorage.removeItem('usuario');
     }
 
     this.loggedIn.next(false);
     this.usernameSubject.next(null);
-
     this.router.navigate(['/auth/login']);
   }
 

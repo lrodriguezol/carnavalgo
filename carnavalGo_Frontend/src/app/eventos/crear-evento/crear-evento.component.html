@@ -1,1 +1,42 @@
+<div class="evento-container">
+    <h2>Crear Evento</h2>
+  
+    <form [formGroup]="crearEventoForm" (ngSubmit)="onSubmit()">
+      <div class="form-group">
+        <label for="titulo">Título del evento*</label>
+        <input id="titulo" type="text" formControlName="titulo" required />
+        <div *ngIf="campoInvalido('titulo')" class="error">Campo obligatorio</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="fecha">Fecha*</label>
+        <input id="fecha" type="date" formControlName="fecha" required />
+        <div *ngIf="campoInvalido('fecha')" class="error">Campo obligatorio</div>
+      </div>
+  
+      <div class="form-group">
+        <label for="hora">Hora</label>
+        <input id="hora" type="time" formControlName="hora" />
+      </div>
+  
+      <div class="form-group">
+        <label for="localizacion">Localización</label>
+        <input id="localizacion" type="text" formControlName="localizacion" />
+      </div>
+  
+      <div class="form-group">
+        <label for="agrupacion">Agrupación</label>
+        <select id="agrupacion" formControlName="agrupacion">
+          <option value="">-- Sin agrupación asociada --</option>
+          <option *ngFor="let agrupacion of agrupaciones" [value]="agrupacion.id">
+            {{ agrupacion.agrupacion }}
+          </option>
+        </select>
+      </div>
 
+      <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+  
+       <button type="submit" aria-label="Crear evento">Crear</button>
+    <button type="button" (click)="cancel()" aria-label="Cancelar creación evento">Cancelar</button>
+  </form>
+  </div>  
