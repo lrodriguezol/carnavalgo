@@ -37,6 +37,7 @@ export class EditarEventoComponent implements OnInit {
         next: (evento) => {
           this.editarEventoForm.patchValue({
             ...evento,
+            agrupacion: evento.agrupacion ?? '',
             hora: evento.hora?.slice(0, 5) || ''
           });
         },

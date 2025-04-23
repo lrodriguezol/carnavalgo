@@ -27,7 +27,6 @@ public class Evento {
 
     private String localizacion;
 
-    @Column(nullable = false)
     private Long agrupacion; 
 
     @Column(name = "creado_por", nullable = false)

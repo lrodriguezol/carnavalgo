@@ -24,7 +24,7 @@
         <p><strong>Fecha:</strong> {{ eventoSeleccionado.fecha | date:'fullDate' | titlecase }}</p>
         <p *ngIf="eventoSeleccionado.hora"><strong>Hora:</strong> {{ eventoSeleccionado.hora }}</p>
         <p *ngIf="eventoSeleccionado.localizacion"><strong>Localización:</strong> {{ eventoSeleccionado.localizacion }}</p>
-        <p *ngIf="eventoSeleccionado.agrupacion"><strong>Agrupación:</strong> {{ agrupacionNombre }}</p>
+        <p *ngIf="eventoSeleccionado.agrupacion"><strong>Agrupación:</strong> {{ agrupacionNombre || 'Sin agrupación asociada' }}</p>
       </ng-container>
     </div>
   </div>

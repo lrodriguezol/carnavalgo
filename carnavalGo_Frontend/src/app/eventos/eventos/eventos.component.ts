@@ -59,7 +59,7 @@ export class EventosComponent {
   
     this.eventoSeleccionado = encontrado?.meta || null;
 
-    if (this.eventoSeleccionado?.agrupacion) {
+    if (this.eventoSeleccionado?.agrupacion != null) {
       this.agrupacionesService.getAgrupacion(this.eventoSeleccionado.agrupacion).subscribe({
         next: (agrupacion) => this.agrupacionNombre = agrupacion.agrupacion,
         error: () => this.agrupacionNombre = 'Sin agrupación.'
