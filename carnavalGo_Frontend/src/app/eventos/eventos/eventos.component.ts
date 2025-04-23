@@ -24,7 +24,7 @@ export class EventosComponent {
   eventoSeleccionado: Evento | null = null;
   eventos: CalendarEvent[] = [];
   errorMsg: string | null = null;
-  agrupacionNombre: string = '';
+  agrupacionNombre: string | null = null;
   diaSeleccionado: boolean = false;
   fechaSeleccionada: Date | null = null;
 
@@ -58,6 +58,7 @@ export class EventosComponent {
     );
   
     this.eventoSeleccionado = encontrado?.meta || null;
+    this.agrupacionNombre = null;
 
     if (this.eventoSeleccionado?.agrupacion != null) {
       this.agrupacionesService.getAgrupacion(this.eventoSeleccionado.agrupacion).subscribe({
