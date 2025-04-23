@@ -77,9 +77,14 @@
         font-weight: bold;
         cursor: pointer;
         font-size: 1rem;
+        
         &:hover {
           background-color: #ecb636;
           color: #6a1b32;             
+        }
+        &:disabled {
+          opacity: 0.5;
+          cursor: not-allowed;
         }
       }
     }
