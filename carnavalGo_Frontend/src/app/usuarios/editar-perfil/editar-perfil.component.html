@@ -1,70 +1,80 @@
-<div class="edit-container">
-    <h2>Editar Perfil</h2>
-    <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
-      
-        <div class="form-group">
+<div class="container-base container-form">
+    <h2 id="editar-perfil-titulo">Editar Perfil</h2>
+  
+    <form [formGroup]="editarForm" (ngSubmit)="onSubmit()" aria-labelledby="editar-perfil-titulo">
+      <div class="form-group">
         <label for="username">Nombre de usuario*</label>
-        <input id="username" type="text" formControlName="username" required>
+        <input id="username" type="text" formControlName="username" readonly aria-readonly="true" />
       </div>
   
       <div class="form-group">
         <label for="password">Contraseña*</label>
-        <input id="password" type="password" formControlName="password" required />
-        <div *ngIf="campoInvalido('password')" class="error">Mínimo 6 caracteres</div>
+        <input id="password" type="password" formControlName="password" required minlength="6" aria-describedby="error-password" />
+        <div id="error-password" class="error" role="alert">
+          <span *ngIf="campoInvalido('password')">La contraseña debe tener mínimo 6 caracteres</span>
+        </div>
       </div>
   
       <div class="form-group">
         <label for="nombre">Nombre*</label>
-        <input id="nombre" type="text" formControlName="nombre" required />
-        <div *ngIf="campoInvalido('nombre')" class="error">Campo obligatorio</div>
+        <input id="nombre" type="text" formControlName="nombre" required aria-describedby="error-nombre" />
+        <div id="error-nombre" class="error" role="alert">
+          <span *ngIf="campoInvalido('nombre')">Campo nombre obligatorio</span>
+        </div>
       </div>
   
       <div class="form-group">
         <label for="apellido1">Primer Apellido*</label>
-        <input id="apellido1" type="text" formControlName="apellido1" required />
-        <div *ngIf="campoInvalido('apellido1')" class="error">Campo obligatorio</div>
+        <input id="apellido1" type="text" formControlName="apellido1" required aria-describedby="error-apellido1" />
+        <div id="error-apellido1" class="error" role="alert">
+          <span *ngIf="campoInvalido('apellido1')">Campo primer apellido obligatorio</span>
+        </div>
       </div>
   
       <div class="form-group">
         <label for="apellido2">Segundo Apellido</label>
-        <input id="apellido2" type="text" formControlName="apellido2">
+        <input id="apellido2" type="text" formControlName="apellido2" />
       </div>
   
       <div class="form-group">
         <label for="telefono">Teléfono</label>
-        <input id="telefono" type="tel" formControlName="telefono" />
-        <div *ngIf="campoInvalido('telefono')" class="error">Teléfono inválido (9 dígitos)</div>
+        <input id="telefono" type="tel" formControlName="telefono" pattern="[0-9]{9}" aria-describedby="error-telefono" />
+        <div id="error-telefono" class="error" role="alert">
+          <span *ngIf="campoInvalido('telefono')">Teléfono inválido (9 dígitos)</span>
+        </div>
       </div>
   
       <div class="form-group">
         <label for="email">Correo electrónico*</label>
-        <input id="email" type="email" formControlName="email" required />
-        <div *ngIf="campoInvalido('email')" class="error">Correo inválido</div>
+        <input id="email" type="email" formControlName="email" readonly aria-readonly="true" />
       </div>
   
       <div class="form-group row">
         <label>Rol*</label>
         <div class="radio-group-inline">
           <label>
-            <input type="radio" formControlName="rol" value="AFICIONADO" />
+            <input type="radio" formControlName="rol"  aria-describedby="error-rol" value="AFICIONADO" />
             Aficionado
           </label>
           <label>
-            <input type="radio" formControlName="rol" value="POSTULANTE" />
+            <input type="radio" formControlName="rol"  aria-describedby="error-rol" value="POSTULANTE" />
             Postulante
           </label>
           <label *ngIf="esAdmin">
-            <input type="radio" formControlName="rol" value="ADMINISTRADOR" />
+            <input type="radio" formControlName="rol"  aria-describedby="error-rol" value="ADMINISTRADOR" />
             Administrador
           </label>
         </div>
-        <div *ngIf="campoInvalido('rol')" class="error">Campo obligatorio</div>
+        <div id="error-rol" class="error" role="alert">
+          <span *ngIf="campoInvalido('rol')">Campo rol obligatorio</span>
+        </div>
       </div>
-      
-      <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
-
-      <button type="submit" aria-label="Guardar perfil">Guardar</button>
-      <button type="button" (click)="cancel()" aria-label="Cancelar edición del perfil">Cancelar</button>
+  
+      <div *ngIf="errorMsg" class="error" role="alert">{{ errorMsg }}</div>
+  
+      <div class="acciones">
+        <button class="button-formulario" type="submit" aria-label="Guardar cambios del perfil">Guardar</button>
+        <button class="button-formulario" type="button" (click)="cancel()" aria-label="Cancelar edición de perfil">Cancelar</button>
+      </div>
     </form>
   </div>
-  

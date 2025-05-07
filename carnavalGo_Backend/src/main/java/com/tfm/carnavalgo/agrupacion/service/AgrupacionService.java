@@ -53,4 +53,8 @@ public class AgrupacionService {
             return repository.save(actual);
         }).orElse(null);
     }
+
+    public List<Agrupacion> getAgrupacionesPorUsuario(Long userId) {
+        return repository.findByCreadoPorId(userId);
+    }
 }

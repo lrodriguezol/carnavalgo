@@ -28,4 +28,8 @@ export class AgrupacionesService {
     actualizarAgrupacion(id: number, agrupacion: Agrupacion): Observable<Agrupacion> {
         return this.http.put<Agrupacion>(`${this.apiUrl}/${id}`, agrupacion);
     }
+
+    getAgrupacionesPorUsuario(): Observable<Agrupacion[]> {
+        return this.http.get<Agrupacion[]>(`${this.apiUrl}/user`);
+      }
 }

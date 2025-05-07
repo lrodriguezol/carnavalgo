@@ -1,21 +1,24 @@
 <div class="ubicaciones-container">
-  
-  <div class="mapa-container">
-    <mgl-map [style]="style" [zoom]="[zoom]" [center]="center" [minZoom]="12" [maxZoom]="18">
-      <mgl-marker *ngFor="let ubicacion of ubicaciones" [lngLat]="[+ubicacion.longitud, +ubicacion.latitud]" (click)="seleccionarUbicacion(ubicacion)">
+  <div class="mapa-container" role="region" aria-label="Mapa de ubicaciones">
+    <mgl-map *ngIf="isBrowser" [style]="style" [zoom]="[zoom]" [center]="center" [minZoom]="12" [maxZoom]="18" (mapClick)="deseleccionarUbicacion()">
+      <mgl-marker *ngFor="let ubicacion of ubicaciones" [lngLat]="[+ubicacion.longitud, +ubicacion.latitud]">
+        <div (click)="seleccionarUbicacion(ubicacion, $event)"  role="button" tabindex="0" class="custom-marker" aria-label="Seleccionar ubicación"></div>
       </mgl-marker>
     </mgl-map>
   </div>
 
-  <div *ngIf="ubicacionSeleccionada" class="info-ubicacion">
-    <h3>{{ ubicacionSeleccionada.lugar }}</h3>
-    <p>
-      Coordenadas: {{ ubicacionSeleccionada.latitud }} / {{ ubicacionSeleccionada.longitud }}
-    </p>
+  <div class="detalle" *ngIf="ubicacionSeleccionada" role="region" aria-label="Detalle de la ubicación seleccionada">
+    <h2>Detalle de la ubicación seleccionada</h2>
+
+    <div class="detalle-info">
+      <p><strong>Lugar:</strong> {{ ubicacionSeleccionada.lugar }}</p>
+      <p *ngIf="agrupacionGuardada"><strong>Agrupación:</strong> {{ agrupacionGuardada.agrupacion }}</p>
+      <p *ngIf="eventoGuardado"><strong>Evento:</strong> {{ eventoGuardado.titulo }}</p>
+    </div>
   </div>
 
-   <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
-    <button class="btn">Añadir ubicación</button>
-    <button class="btn" [disabled]="!ubicacionSeleccionada" (click)="editarUbicacion()">Editar ubicación</button>
+  <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
+    <button class= "button-formulario" [disabled]="ubicacionSeleccionada" (click)="crearUbicacion()"  aria-label="Crear nueva ubicación">Añadir Ubicación</button>
+    <button class= "button-formulario" [disabled]="!ubicacionSeleccionada || !puedeEditarUbicacion()" (click)="editarUbicacion()" aria-label="Editar ubicación seleccionada">Editar ubicación</button>
   </div>
 </div>

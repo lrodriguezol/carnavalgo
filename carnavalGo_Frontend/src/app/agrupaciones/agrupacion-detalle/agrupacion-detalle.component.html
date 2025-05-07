@@ -1,25 +1,25 @@
-<div class="detalle-agrupacion-container" *ngIf="agrupacion;">
-  <h1 class="titulo">{{ agrupacion.agrupacion }}</h1>
+<div class="detalle-agrupacion-container container-base" aria-labelledby="titulo-agrupacion" *ngIf="agrupacion;">
+  <h1 id="titulo-agrupacion" class="titulo">{{ agrupacion.agrupacion }}</h1>
 
-  <div class="datos-basicos">
-    <p><strong>Modalidad: </strong> {{ agrupacion.modalidad }}</p>
-    <p><strong>Autor: </strong> {{ agrupacion.autor }}</p>
-    <p><strong>Componentes: </strong> {{ agrupacion.componentes }}</p>
-    <p><strong>Redes sociales: </strong> {{ agrupacion.redesSociales }}</p>
-    <p><strong>Historia: </strong>{{ agrupacion.historia }}</p>
-  </div>
+  <dl class="datos-basicos">
+    <div><dt>Modalidad:</dt><dd>{{ agrupacion.modalidad }}</dd></div>
+    <div><dt>Autor/a:</dt><dd>{{ agrupacion.autor }}</dd></div>
+    <div><dt>Componentes:</dt><dd>{{ agrupacion.componentes }}</dd></div>
+    <div><dt>Redes sociales:</dt><dd>{{ agrupacion.redesSociales }}</dd></div>
+    <div><dt>Historia:</dt><dd>{{ agrupacion.historia }}</dd></div>
+  </dl>
 
   <div class="galeria" *ngIf="agrupacion.imagen">
-    <img [src]="agrupacion.imagen" alt="Imagen de la agrupación" />
+    <img [src]="agrupacion.imagen" alt="Imagen de la agrupación" role="presentation" />
   </div>
 
   <div class="comentarios">
     <h2>Comentarios / Encuestas</h2>
-    <p style="color: grey; text-align: center;">(Próximamente disponible...)</p>
+    <p class="info-futuro" aria-hidden="true">(Próximamente disponible...)</p>
   </div>
 
   <div class="acciones">
-    <button *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'" class="btn" (click)="editarAgrupacion()" aria-label="Editar agrupación">Editar agrupación</button>
-    <button *ngIf="userRole === 'ADMINISTRADOR'" class="btn" disabled aria-label="Añadir encuesta sobre esta agrupación" title="Funcionalidad aún no disponible">Añadir encuesta</button>
+    <button *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'" class="button-formulario" (click)="editarAgrupacion()" aria-label="Editar agrupación">Editar agrupación</button>
+    <button *ngIf="userRole === 'ADMINISTRADOR'" class="button-formulario" disabled aria-label="Añadir encuesta sobre esta agrupación" title="Funcionalidad aún no disponible">Añadir encuesta</button>
   </div>
 </div>

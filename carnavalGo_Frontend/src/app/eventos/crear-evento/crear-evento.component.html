@@ -1,17 +1,21 @@
-<div class="evento-container">
+<div class="container-base container-form">
     <h2>Crear Evento</h2>
   
     <form [formGroup]="crearEventoForm" (ngSubmit)="onSubmit()">
       <div class="form-group">
         <label for="titulo">Título del evento*</label>
-        <input id="titulo" type="text" formControlName="titulo" required />
-        <div *ngIf="campoInvalido('titulo')" class="error">Campo obligatorio</div>
+        <input id="titulo" type="text" formControlName="titulo" aria-describedby="error-titulo" required />
+        <div id="error-titulo" class="error" role="alert">
+          <span *ngIf="campoInvalido('titulo')">Campo título obligatorio</span>
+        </div>
       </div>
   
       <div class="form-group">
         <label for="fecha">Fecha*</label>
-        <input id="fecha" type="date" formControlName="fecha" required />
-        <div *ngIf="campoInvalido('fecha')" class="error">Campo obligatorio</div>
+        <input id="fecha" type="date" formControlName="fecha" aria-describedby="error-fecha" required />
+        <div id="error-fecha" class="error" role="alert">
+          <span *ngIf="campoInvalido('fecha')">Campo fecha obligatorio</span>
+        </div>
       </div>
   
       <div class="form-group">
@@ -36,7 +40,9 @@
 
       <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
   
-       <button type="submit" aria-label="Crear evento">Crear</button>
-    <button type="button" (click)="cancel()" aria-label="Cancelar creación evento">Cancelar</button>
+      <div class="acciones">
+        <button class="button-formulario" type="submit" aria-label="Crear evento">Crear Evento</button>
+        <button class="button-formulario" type="button" (click)="cancel()" aria-label="Cancelar creación evento">Cancelar</button>
+      </div>
   </form>
   </div>  

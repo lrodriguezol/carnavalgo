@@ -1,12 +1,14 @@
-<div class="editar-agrupacion-container">
+<div class="container-base container-form">
   <h2>Editar Agrupación</h2>
 
   <form [formGroup]="editarForm" (ngSubmit)="onSubmit()">
 
     <div class="form-group">
       <label for="agrupacion">Nombre agrupación*</label>
-      <input id="agrupacion" type="text" formControlName="agrupacion" required />
-      <div *ngIf="campoInvalido('agrupacion')" class="error">Campo obligatorio</div>
+      <input id="agrupacion" type="text" formControlName="agrupacion" aria-describedby="error-agrupacion" required />
+      <div id="error-agrupacion" class="error" role="alert">
+        <span *ngIf="campoInvalido('agrupacion')">Campo agrupación obligatorio</span>
+      </div>
     </div>
 
     <div class="form-group">
@@ -16,14 +18,18 @@
 
     <div class="form-group">
       <label for="modalidad">Modalidad*</label>
-      <input id="modalidad" type="text" formControlName="modalidad" required />
-      <div *ngIf="campoInvalido('modalidad')" class="error">Campo obligatorio</div>
+      <input id="modalidad" type="text" formControlName="modalidad" aria-describedby="error-modalidad" required />
+      <div id="error-modalidad" class="error" role="alert">
+        <span *ngIf="campoInvalido('modalidad')">Campo modalidad obligatorio</span>
+      </div>
     </div>
 
     <div class="form-group">
-      <label for="autor">Autor*</label>
-      <input id="autor" type="text" formControlName="autor" required />
-      <div *ngIf="campoInvalido('autor')" class="error">Campo obligatorio</div>
+      <label for="autor">Autor/a*</label>
+      <input id="autor" type="text" formControlName="autor" aria-describedby="error-autor" required />
+      <div id="error-autor" class="error" role="alert">
+        <span *ngIf="campoInvalido('autor')">Campo autor/a obligatorio</span>
+      </div>
     </div>
 
     <div class="form-group">
@@ -41,9 +47,11 @@
       <input id="redesSociales" type="text" formControlName="redesSociales" />
     </div>
 
-    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+    <div *ngIf="errorMsg" class="error" role="alert">{{ errorMsg }}</div>
 
-    <button type="submit" aria-label="Guardar agrupación">Guardar</button>
-    <button type="button" (click)="cancel()" aria-label="Cancelar edición">Cancelar</button>
+    <div class="acciones">
+      <button class="button-formulario" type="submit" [disabled]="editarForm.invalid" aria-label="Guardar agrupación">Guardar</button>
+      <button class="button-formulario" type="button" (click)="cancel()" aria-label="Cancelar edición">Cancelar</button>
+    </div>
   </form>
 </div>

@@ -78,4 +78,22 @@ public class AgrupacionController {
         service.deleteAgrupacion(id);
         return ResponseEntity.noContent().build();
     }
+
+    @GetMapping("/user")
+    public ResponseEntity<?> getAgrupacionesPorUsuario(@AuthenticationPrincipal UserDetails userDetails) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByUsername(userDetails.getUsername());
+
+        if (usuarioOpt.isEmpty()) {
+            return ResponseEntity.status(403).body("Usuario no válido.");
+        }
+
+        Usuario usuario = usuarioOpt.get();
+        
+        if (usuario.getRol() != Rol.POSTULANTE) {
+            return ResponseEntity.status(403).body("Solo los postulantes pueden acceder a sus agrupaciones.");
+        }
+
+        List<Agrupacion> agrupaciones = service.getAgrupacionesPorUsuario(usuario.getId());
+        return ResponseEntity.ok(agrupaciones);
+    }
 }

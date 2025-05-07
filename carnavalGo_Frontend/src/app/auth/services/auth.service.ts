@@ -94,7 +94,7 @@ export class AuthService {
 
     this.loggedIn.next(false);
     this.usernameSubject.next(null);
-    this.router.navigate(['/auth/login']);
+    this.router.navigate(['/']);
   }
 
   isLoggedIn(): boolean {

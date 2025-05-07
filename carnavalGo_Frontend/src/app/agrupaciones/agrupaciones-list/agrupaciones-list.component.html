@@ -1,9 +1,9 @@
-<div class="listado-container">
+<div class="listado-container container-base">
     <h1 class="titulo">Agrupaciones</h1>
     <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
   
    <div class="buscador">
-      <input type="text" [(ngModel)]="busqueda" (input)="buscar()" placeholder="Buscar agrupaciones..."/>
+      <input type="text" [(ngModel)]="busqueda" (input)="buscar()" placeholder="Buscar agrupaciones..." aria-label="Buscar agrupaciones por palabras"/>
     </div>
   
     <div class="grid">
@@ -11,7 +11,7 @@
         <img [src]="agrupacion.imagen" alt="Imagen de la agrupación" />
         <h3>{{ agrupacion.agrupacion }}</h3>
         <p><strong>Modalidad:</strong> {{ agrupacion.modalidad }}</p>
-        <p><strong>Autor:</strong> {{ agrupacion.autor }}</p>
+        <p><strong>Autor/a:</strong> {{ agrupacion.autor }}</p>
         <a [routerLink]="['/agrupaciones', agrupacion.id]"  aria-label="Ver detalle de la agrupación">Detalle</a>
       </div>
     </div>
@@ -27,7 +27,7 @@
     </div>
 
     <div class="crear-agrupacion" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
-      <button class="btn" (click)="irACrearAgrupacion()" aria-label="Añadir nueva agrupación">Añadir agrupación</button>
+      <button class="button-formulario" (click)="irACrearAgrupacion()" aria-label="Añadir nueva agrupación">Añadir agrupación</button>
     </div>
 </div>
   

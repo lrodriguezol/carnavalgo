@@ -1,29 +1,37 @@
-<div class="register-container">
-  <h2>Registro de Usuario</h2>
+<div class="container-base container-form" aria-label="Formulario de registro de usuario">
+  <h2 id="registro-titulo">Registro de Usuario</h2>
 
-  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()">
+  <form [formGroup]="registroForm" (ngSubmit)="onSubmit()" aria-labelledby="registro-titulo">
     <div class="form-group">
       <label for="username">Nombre de usuario*</label>
-      <input id="username" type="text" formControlName="username" required />
-      <div *ngIf="campoInvalido('username')" class="error">Campo obligatorio</div>
+      <input id="username" type="text" formControlName="username" required aria-describedby="error-username" />
+      <div id="error-username" class="error" role="alert">
+        <span *ngIf="campoInvalido('username')">Campo usuario obligatorio</span>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="password">Contraseña*</label>
-      <input id="password" type="password" formControlName="password" required />
-      <div *ngIf="campoInvalido('password')" class="error">Mínimo 6 caracteres</div>
+      <input id="password" type="password" formControlName="password" required minlength="6" aria-describedby="error-password" />
+      <div id="error-password" class="error" role="alert">
+        <span *ngIf="campoInvalido('password')">La contraseña debe tener mínimo 6 caracteres</span>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="nombre">Nombre*</label>
-      <input id="nombre" type="text" formControlName="nombre" required />
-      <div *ngIf="campoInvalido('nombre')" class="error">Campo obligatorio</div>
+      <input id="nombre" type="text" formControlName="nombre" required aria-describedby="error-nombre" />
+      <div id="error-nombre" class="error" role="alert">
+        <span *ngIf="campoInvalido('nombre')">Campo nombre obligatorio</span>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="apellido1">Primer Apellido*</label>
-      <input id="apellido1" type="text" formControlName="apellido1" required />
-      <div *ngIf="campoInvalido('apellido1')" class="error">Campo obligatorio</div>
+      <input id="apellido1" type="text" formControlName="apellido1" required aria-describedby="error-apellido1" />
+      <div id="error-apellido1" class="error" role="alert">
+        <span *ngIf="campoInvalido('apellido1')">Campo primer apellido obligatorio</span>
+      </div>
     </div>
 
     <div class="form-group">
@@ -33,34 +41,43 @@
 
     <div class="form-group">
       <label for="telefono">Teléfono</label>
-      <input id="telefono" type="tel" formControlName="telefono" />
-      <div *ngIf="campoInvalido('telefono')" class="error">Teléfono inválido (9 dígitos)</div>
+      <input id="telefono" type="tel" formControlName="telefono" pattern="[0-9]{9}" aria-describedby="error-telefono" />
+      <div id="error-telefono" class="error" role="alert">
+        <span *ngIf="campoInvalido('telefono')">Teléfono inválido (9 dígitos)</span>
+      </div>
     </div>
 
     <div class="form-group">
       <label for="email">Correo electrónico*</label>
-      <input id="email" type="email" formControlName="email" required />
-      <div *ngIf="campoInvalido('email')" class="error">Correo inválido</div>
+      <input id="email" type="email" formControlName="email" required aria-describedby="error-email" />
+      <div id="error-email" class="error" role="alert">
+        <span *ngIf="campoInvalido('email')">Correo inválido</span>
+      </div>
+
     </div>
 
     <div class="form-group row">
       <label>Rol*</label>
       <div class="radio-group-inline">
         <label>
-          <input type="radio" formControlName="rol" value="aficionado" />
+          <input type="radio" formControlName="rol" aria-describedby="error-rol" value="aficionado" />
           Aficionado
         </label>
         <label>
-          <input type="radio" formControlName="rol" value="postulante" />
+          <input type="radio" formControlName="rol" aria-describedby="error-rol" value="postulante" />
           Postulante
         </label>
       </div>
-      <div *ngIf="campoInvalido('rol')" class="error">Campo obligatorio</div>
+      <div id="error-rol" class="error" role="alert">
+        <span *ngIf="campoInvalido('rol')">Campo rol obligatorio</span>
+      </div>
     </div>
 
-    <div *ngIf="errorMsg" class="error">{{ errorMsg }}</div>
+    <div *ngIf="errorMsg" class="error" role="alert">{{ errorMsg }}</div>
 
-    <button type="submit" aria-label="Enviar formulario de registro">Registrar</button>
-    <button type="button" (click)="cancel()" aria-label="Cancelar registro">Cancelar</button>
+    <div class="acciones">
+      <button class="button-formulario" type="submit" aria-label="Enviar formulario de registro">Registrar</button>
+      <button class="button-formulario" type="button" (click)="cancel()" aria-label="Cancelar registro">Cancelar</button>
+    </div>
   </form>
 </div>

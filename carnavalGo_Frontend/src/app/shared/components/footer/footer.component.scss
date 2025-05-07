@@ -1,48 +1,93 @@
+@use 'variables' as *;
+
 .footer {
-  background-color: #6a1b32;
-  color:  #ecb636;
+  background-color: $color-burdeos;
+  color: $color-mostaza;
   padding: 1rem 2rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   flex-wrap: wrap;
 
-    .logo-img {
-      height: 40px;
-    }
-    
+  .footer-logo-link {
+    display: inline-block;
+
     .footer-logo-img {
       height: 80px;
     }
-    
-    .logo-link,
-    .footer-logo-link {
-      display: inline-block;
-    }
+  }
 
+  .footer-links {
+    flex: 2;
+    display: flex;
+    justify-content: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    text-align: center;
 
-    .footer-links {
-      flex: 2;
-      display: flex;
-      justify-content: center;
-      gap: 2rem;
-      flex-wrap: wrap;
-      text-align: center;
-    
-      a {
-        color: #ecb636;
-        background-color: transparent;
-        padding: 0.4rem 0.8rem;
-        border-radius: 4px;
-        font-weight: 500;
-        text-decoration: none;
-        transition: all 0.3s ease;
-    
-        &:hover {
-          background-color: #ecb636;
-          color: #6a1b32;
-        }
+    a {
+      color: $color-mostaza;
+      background-color: transparent;
+      padding: 0.4rem 0.8rem;
+      border-radius: 4px;
+      font-weight: 500;
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background-color: $color-mostaza;
+        color: $color-burdeos;
       }
     }
-    
+  }
+
+  .footer-contact-icon {
+    display: none;
+  }
+}
+
+@media (max-width: 768px) {
+  .footer {
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    padding: 2rem 1rem;
+
+    .footer-logo-link {
+      display: none;
+    }
+
+    .footer-links {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      gap: 0.5rem;
+
+      a {
+        font-size: 1rem;
+        padding: 0.2rem 0.5rem;
+        color: $color-mostaza;
+        text-decoration: none;
+
+        &:hover {
+          background-color: $color-mostaza;
+          color: $color-burdeos;
+        }
+      }
+
+      .footer-contact-desktop {
+        display: none;
+      }
+    }
+
+    .footer-contact-icon {
+      display: block;
+
+      a {
+        font-size: 1.5rem;
+        color: white;
+        text-decoration: none;
+      }
+    }
+  }
 }

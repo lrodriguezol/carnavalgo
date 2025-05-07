@@ -1,25 +1,26 @@
-<div class="eventos-container">
+<div class="eventos-container container-base">
   <div class="contenido">
     <div class="calendario">
       <div class="cal-nav">
-        <button (click)="verMesAnterior()">‹</button>
+        <button (click)="verMesAnterior()" aria-label="Mes anterior">‹</button>
         <span>{{ viewDate | date: 'MMMM yyyy' }}</span>
-        <button (click)="verMesSiguiente()">›</button>
+        <button (click)="verMesSiguiente()" aria-label="Mes siguiente">›</button>
       </div>
       <mwl-calendar-month-view [viewDate]="viewDate" [events]="eventos" [weekStartsOn]="1" (dayClicked)="onDayClick($event.day.date)"></mwl-calendar-month-view>
     </div>
 
     <div class="detalle">
       <ng-template #noEventoSeleccionado>
-        <h2 *ngIf="!fechaSeleccionada">Selecciona un día del calendario</h2>
+        <h2>Eventos del día</h2>
+        <p *ngIf="!fechaSeleccionada" id="aviso" role="alert">Por favor, selecciona un día del calendario.</p>
         <ng-container *ngIf="fechaSeleccionada">
-          <h2>No existen eventos para el día seleccionado</h2>
+          <h3>No existen eventos para el día del calendario seleccionado</h3>
           <p><strong>Fecha:</strong> {{ fechaSeleccionada | date:'fullDate' | titlecase }}</p>
         </ng-container>
       </ng-template>
 
       <ng-container *ngIf="eventoSeleccionado; else noEventoSeleccionado">
-        <h2>Detalles del evento</h2>
+        <h2>Eventos del día</h2>
         <p><strong>Título:</strong> {{ eventoSeleccionado.titulo }}</p>
         <p><strong>Fecha:</strong> {{ eventoSeleccionado.fecha | date:'fullDate' | titlecase }}</p>
         <p *ngIf="eventoSeleccionado.hora"><strong>Hora:</strong> {{ eventoSeleccionado.hora }}</p>
@@ -30,7 +31,8 @@
   </div>
 
   <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
-    <button class="btn" [disabled]="userRole === 'POSTULANTE' || eventoSeleccionado !== null" (click)="crearEvento()" aria-label="Crear evento">Añadir evento</button>
-    <button class="btn" [disabled]="userRole === 'POSTULANTE' || !eventoSeleccionado" (click)="editarEvento()" aria-label="Editar evento">Editar evento</button>
+    <button class="button-formulario" [disabled]="userRole === 'POSTULANTE' || eventoSeleccionado !== null" (click)="crearEvento()" aria-label="Crear evento">Añadir evento</button>
+    <button class="button-formulario" [disabled]="userRole === 'POSTULANTE' || !eventoSeleccionado" (click)="editarEvento()" aria-label="Editar evento">Editar evento</button>
   </div>
+  
 </div>

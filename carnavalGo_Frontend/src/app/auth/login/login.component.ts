@@ -20,7 +20,7 @@ export class LoginComponent {
     ngOnInit(): void {
       this.route.queryParams.subscribe(params => {
         if (params['registrado'] === 'true') {
-          this.mensajeExito = 'Usuario registrado correctamente.';
+          this.mensajeExito = 'Registro correcto. Inicia sesión para continuar.';
         }
       });
     }
@@ -28,6 +28,12 @@ export class LoginComponent {
     onLogin() {
       
       this.errorMsg = ''; 
+
+      if (!this.username.trim() || !this.password.trim()) {
+        this.errorMsg = 'Debe introducir usuario y contraseña';
+        return;
+      }
+
       this.authService.login({ username: this.username, password: this.password }).subscribe({
         next: (res) => {
           this.authService.saveToken(res.token);
@@ -37,6 +43,8 @@ export class LoginComponent {
         },
         error: () => {
           this.errorMsg = 'Usuario o contraseña incorrectos';
+          this.username = ''; 
+          this.password = ''; 
         }
       });
     }

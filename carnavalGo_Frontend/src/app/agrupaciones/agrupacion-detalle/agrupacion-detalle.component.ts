@@ -20,8 +20,10 @@ export class AgrupacionDetalleComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRole = this.authService.getRol();
-    const id = Number(this.route.snapshot.paramMap.get('id'));
-    if (!id) {
+    const idParam = this.route.snapshot.paramMap.get('id');
+    const id = idParam ? Number(idParam) : null;
+
+    if (!id || isNaN(id)) {
       this.errorMsg = 'ID de agrupación no válido.';
       return;
     }
@@ -39,7 +41,9 @@ export class AgrupacionDetalleComponent implements OnInit {
 
   //Si pulsamos editar nos lleva a la pantalla de edición con los datos de la agrupación
   editarAgrupacion(): void {
-    this.router.navigate(['/agrupaciones/editar-agrupacion', this.agrupacion?.id]);
+    if (this.agrupacion?.id) {
+      this.router.navigate(['/agrupaciones/editar-agrupacion', this.agrupacion.id]);
+    }
   }
 
   anadirEncuesta(): void {

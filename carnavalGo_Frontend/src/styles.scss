@@ -1,9 +1,10 @@
-html, body { height: 100%; }
-body {
+@use 'variables' as *;
+
+html, body {
+  height: 100%;
   margin: 0;
   font-family: Roboto, "Helvetica Neue", sans-serif;
 }
-
 
 .legal-section,
 .contact-section {
@@ -13,12 +14,15 @@ body {
   line-height: 1.6;
 }
 
-.legal-section h1, h2, h3,
-.contact-section h1, h2, h3 {
-  color: #6a1b32;
+.legal-section h1,
+.legal-section h2,
+.legal-section h3,
+.contact-section h1,
+.contact-section h2,
+.contact-section h3 {
+  color: $color-burdeos;
 }
-html, body { height: 100%; }
-body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
 
 .error{
   color:red;
@@ -29,4 +33,138 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   color: green;
   margin-bottom: 1rem;
   text-align: center;
+}
+
+.container-base {
+  max-width: 500px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background-color: $gris-fondo;
+  border-radius: 8px;
+}
+
+.container-form{
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.05);
+    border-radius: 8px;
+    border: 1px solid #ddd;
+}
+
+h2 {
+  color: $color-burdeos;
+  margin-bottom: 1rem;
+  text-align: center;
+  font-size: 2rem;
+}
+
+label {
+  display: block;
+  margin: 1rem 0 0.3rem;
+  font-weight: bold;
+  color: #6a1b32;
+}
+
+input, textarea {
+  width: 100%;
+  padding: 0.5rem;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+}
+
+button {
+  background-color: $color-burdeos;
+  color: $color-mostaza;
+  padding: 0.6rem 1.2rem;
+  border: none;
+  border-radius: 4px;
+  font-weight: bold;
+  cursor: pointer;
+  font-size: 1rem;
+  margin-top: 1.5rem;
+
+  &:hover {
+    background-color: $color-mostaza;
+    color: $color-burdeos;
+  }
+
+  &:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+}
+
+.form-group.row {
+  margin: 1rem 0 0.3rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+
+  label {
+    margin: 0;
+    white-space: nowrap;
+  }
+
+  .radio-group-inline {
+    display: flex;
+    gap: 1.5rem;
+
+    label {
+      display: flex;
+      align-items: center;
+      gap: 0.3rem;
+    }
+  }
+}
+
+.acciones {
+  display: flex;
+  gap: 1rem;
+}
+
+.button-formulario{
+    margin-top: 1.5rem;
+}
+
+@media (max-width: 768px) {
+  h1 {
+    font-size: 2rem;
+  }
+
+  h2 {
+    font-size: 1.5rem;
+  }
+
+  h3 {
+    font-size: 1.2rem;
+  }
+
+  .container-base {
+    padding: 1.5rem;
+    margin: 1rem;
+    box-sizing: border-box; 
+    width: calc(100% - 2rem); 
+  }
+
+  input,
+  textarea,
+  select,
+  button {
+    max-width: 100%;
+    box-sizing: border-box;
+  }
+
+  .button-formulario {
+    display: block;
+    margin: 1rem auto 0 auto; 
+    width: 100%;
+    max-width: 250px; 
+    text-align: center;
+  }
+
+  @media (max-width: 768px) {
+    .acciones {
+      flex-direction: column;
+      align-items: center;
+      gap: 0;
+    }
+  }
 }

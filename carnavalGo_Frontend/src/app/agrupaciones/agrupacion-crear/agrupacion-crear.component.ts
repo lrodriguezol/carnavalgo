@@ -33,7 +33,6 @@ export class AgrupacionCrearComponent {
     if (this.crearForm.invalid) {
       this.errorMsg = 'Existen errores en el formulario.';
       this.crearForm.markAllAsTouched();
-      console.warn('Formulario inválido:', this.crearForm.value);
       return;
     }
 

@@ -1,0 +1,57 @@
+<div class="container-base container-form">
+  <h2>Crear Ubicación</h2>
+
+  <form [formGroup]="crearUbicacionForm" (ngSubmit)="onSubmit()">
+
+    <div class="form-group">
+      <label for="lugar">Lugar <span aria-hidden="true">*</span></label>
+      <input id="lugar" type="text" formControlName="lugar" required aria-required="true" />
+      <div id="error-lugar" class="error" role="alert">
+        <span *ngIf="campoInvalido('lugar')">Campo lugar obligatorio</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="latitud">Latitud <span aria-hidden="true">*</span></label>
+      <input id="latitud" type="text" formControlName="latitud" required aria-required="true" inputmode="decimal" />
+      <div id="error-latitud" class="error" role="alert">
+        <span *ngIf="campoInvalido('latitud')">Campo latitud obligatorio</span>
+      </div>
+    </div>
+
+    <div class="form-group">
+      <label for="longitud">Longitud <span aria-hidden="true">*</span></label>
+      <input id="longitud" type="text" formControlName="longitud" required aria-required="true" inputmode="decimal" />
+      <div id="error-longitud" class="error" role="alert">
+        <span *ngIf="campoInvalido('longitud')">Campo longitud obligatorio</span>
+      </div>
+    </div>
+
+    <div class="form-group" *ngIf="userRole === 'ADMINISTRADOR'">
+      <label for="evento">Evento (opcional)</label>
+      <select id="evento" formControlName="evento">
+        <option value="">-- Sin evento asociado --</option>
+        <option *ngFor="let evento of eventos" [value]="evento.id">
+          {{ evento.titulo }}
+        </option>
+      </select>
+    </div>
+
+    <div class="form-group">
+      <label for="agrupacion">Agrupación (opcional)</label>
+      <select id="agrupacion" formControlName="agrupacion">
+        <option value="">-- Sin agrupación asociada --</option>
+        <option *ngFor="let agrupacion of agrupaciones" [value]="agrupacion.id">
+          {{ agrupacion.agrupacion }}
+        </option>
+      </select>
+    </div>
+
+    <div *ngIf="errorMsg" class="error" role="alert">{{ errorMsg }}</div>
+
+    <div class="acciones">
+      <button class="button-formulario" type="submit" aria-label="Crear ubicación">Crear Ubicación</button>
+      <button class="button-formulario" type="button" (click)="cancel()" aria-label="Cancelar creación">Cancelar</button>
+    </div>
+  </form>
+</div>
