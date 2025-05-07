@@ -19,7 +19,10 @@
   </div>
 
   <div class="acciones">
-    <button *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'" class="button-formulario" (click)="editarAgrupacion()" aria-label="Editar agrupación">Editar agrupación</button>
-    <button *ngIf="userRole === 'ADMINISTRADOR'" class="button-formulario" disabled aria-label="Añadir encuesta sobre esta agrupación" title="Funcionalidad aún no disponible">Añadir encuesta</button>
+    <button 
+  *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'" class="button-formulario"  (click)="editarAgrupacion()" 
+  [disabled]="!puedeEditarAgrupacion()" aria-label="Editar agrupación">Editar agrupación</button>
+    <button *ngIf="userRole === 'ADMINISTRADOR'" class="button-formulario" disabled aria-label="Añadir encuesta sobre esta agrupación" 
+    title="Funcionalidad aún no disponible">Añadir encuesta</button>
   </div>
 </div>

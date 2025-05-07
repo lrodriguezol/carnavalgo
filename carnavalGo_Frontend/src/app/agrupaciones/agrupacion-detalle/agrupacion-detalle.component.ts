@@ -39,6 +39,28 @@ export class AgrupacionDetalleComponent implements OnInit {
     });
   }
 
+  puedeEditarAgrupacion(): boolean {
+    if (!this.agrupacion) return false;
+  
+    if (this.userRole === 'ADMINISTRADOR') return true;
+  
+    if (this.userRole === 'POSTULANTE') {
+      let creadorId: number | null = null;
+  
+      if (typeof this.agrupacion.creadoPor === 'object' && this.agrupacion.creadoPor !== null) {
+        creadorId = (this.agrupacion.creadoPor as any).id;
+      } else {
+        creadorId = this.agrupacion.creadoPor as number;
+      }
+
+      const userId = this.authService.getUser()?.id;
+      return creadorId === userId;
+    }
+  
+    return false;
+  }
+  
+
   //Si pulsamos editar nos lleva a la pantalla de edición con los datos de la agrupación
   editarAgrupacion(): void {
     if (this.agrupacion?.id) {
