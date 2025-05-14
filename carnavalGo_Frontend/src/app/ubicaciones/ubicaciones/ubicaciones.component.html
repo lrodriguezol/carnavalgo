@@ -19,6 +19,6 @@
 
   <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
     <button class= "button-formulario" [disabled]="ubicacionSeleccionada" (click)="crearUbicacion()"  aria-label="Crear nueva ubicación">Añadir Ubicación</button>
-    <button class= "button-formulario" [disabled]="!ubicacionSeleccionada || !puedeEditarUbicacion()" (click)="editarUbicacion()" aria-label="Editar ubicación seleccionada">Editar ubicación</button>
+    <button class= "button-formulario" [disabled]="!ubicacionSeleccionada || !puedeEditarUbicacion()" (click)="editarUbicacion()" aria-label="Editar ubicación seleccionada">Editar Ubicación</button>
   </div>
 </div>

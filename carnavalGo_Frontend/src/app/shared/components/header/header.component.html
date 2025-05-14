@@ -17,14 +17,14 @@
         <div class="nav-item user-dropdown" (click)="toggleMenu()" tabindex="0" role="button" aria-label="Abrir menú de usuario"  aria-haspopup="true" [attr.aria-expanded]="menuAbierto">
           <span class="nav-link">Hola, {{ username }}</span>
           <div class="dropdown-menu" *ngIf="menuAbierto">
-            <a (click)="editarPerfil()" aria-label="Editar perfil de usuario">Editar perfil</a>
-            <a (click)="logout()" aria-label="Cerrar sesión">Cerrar sesión</a>
+            <a (click)="editarPerfil()" aria-label="Editar perfil de usuario">Editar Perfil</a>
+            <a (click)="logout()" aria-label="Cerrar sesión">Cerrar Sesión</a>
           </div>
         </div>
       </ng-container>
 
       <ng-template #loginLink>
-        <a routerLink="/auth/login" class="nav-link" aria-label="Iniciar sesión">Iniciar sesión</a>
+        <a routerLink="/auth/login" class="nav-link" aria-label="Iniciar sesión">Iniciar Sesión</a>
       </ng-template>
     </nav>
   </div>

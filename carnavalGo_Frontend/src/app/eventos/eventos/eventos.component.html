@@ -31,8 +31,8 @@
   </div>
 
   <div class="acciones" *ngIf="userRole === 'ADMINISTRADOR' || userRole === 'POSTULANTE'">
-    <button class="button-formulario" [disabled]="userRole === 'POSTULANTE' || eventoSeleccionado !== null" (click)="crearEvento()" aria-label="Crear evento">Añadir evento</button>
-    <button class="button-formulario" [disabled]="userRole === 'POSTULANTE' || !eventoSeleccionado" (click)="editarEvento()" aria-label="Editar evento">Editar evento</button>
+    <button class="button-formulario" [disabled]="userRole === 'POSTULANTE' || eventoSeleccionado !== null" (click)="crearEvento()" aria-label="Crear evento">Añadir Evento</button>
+    <button class="button-formulario" [disabled]="userRole === 'POSTULANTE' || !eventoSeleccionado" (click)="editarEvento()" aria-label="Editar evento">Editar Evento</button>
   </div>
   
 </div>
