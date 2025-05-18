@@ -70,8 +70,6 @@ export class RolGuard implements CanActivate {
       return this.agrupacionesService.getAgrupacion(agrupacionId).pipe(
         map(agrupacion => {
           const creadorId = (agrupacion.creadoPor as any)?.id ?? agrupacion.creadoPor;
-          console.log('Agrupación cargada:', agrupacion);
-          console.log('ID del creador:', creadorId, ' - ID del usuario logado:', userId);
           return creadorId === userId;
         }),
         catchError(() => of(false)),

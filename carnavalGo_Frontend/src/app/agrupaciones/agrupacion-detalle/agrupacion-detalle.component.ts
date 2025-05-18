@@ -69,6 +69,6 @@ export class AgrupacionDetalleComponent implements OnInit {
   }
 
   anadirEncuesta(): void {
-    console.log('Añadir encuesta para agrupación:', this.agrupacion?.id);
+    
   }
 }

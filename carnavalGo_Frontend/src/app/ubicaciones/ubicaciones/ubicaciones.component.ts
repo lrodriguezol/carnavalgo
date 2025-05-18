@@ -32,7 +32,6 @@ export class UbicacionesComponent implements OnInit {
 
   ngOnInit(): void {
     this.userRole = this.authService.getRol();
-    console.log('ROL del usuario:', this.userRole); 
     this.cargarUbicaciones();
   }
 
@@ -49,7 +48,6 @@ export class UbicacionesComponent implements OnInit {
 
 
   seleccionarUbicacion(ubicacion: any, event?: MouseEvent) {
-    console.log('Ubicación seleccionada:', ubicacion); 
 
     if (event) {
       event.stopPropagation();

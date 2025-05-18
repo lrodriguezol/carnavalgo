@@ -68,7 +68,6 @@ export class EditarPerfilComponent {
     
       this.usuariosService.updateUsuario(usuario.id, datosActualizados).subscribe({
         next: (res) => {
-          console.log('Perfil actualizado con éxito:', res);
           this.authService.saveUser(res); // Actualiza el usuario almacenado
           this.router.navigate(['/']); 
         },
