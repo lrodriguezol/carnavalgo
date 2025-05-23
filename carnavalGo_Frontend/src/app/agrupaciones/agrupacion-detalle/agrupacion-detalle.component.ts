@@ -59,7 +59,6 @@ export class AgrupacionDetalleComponent implements OnInit {
   
     return false;
   }
-  
 
   //Si pulsamos editar nos lleva a la pantalla de edición con los datos de la agrupación
   editarAgrupacion(): void {

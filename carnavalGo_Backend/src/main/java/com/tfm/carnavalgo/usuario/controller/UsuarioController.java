@@ -36,7 +36,6 @@ public class UsuarioController {
     public ResponseEntity<?> saveUsuario(@Valid @RequestBody Usuario usuario) {
        
         //Se comprueba que el nombre de usuario y correo no existan
-
         if (usuarioRepository.existsByUsername(usuario.getUsername())) {
             return ResponseEntity.badRequest().body("El nombre de usuario ya existe.");
         }

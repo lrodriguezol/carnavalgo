@@ -30,7 +30,7 @@ export class RolGuard implements CanActivate {
 
     const userId = this.authService.getUserId();
 
-    //Controlar que un usuario postulante no pueda editar la ubicacion de una agrupación que no es la suya o de un evento creado por Admin
+    //Controlar que un usuario postulante no pueda editar la ubicacion de una agrupación que no es suya o de un evento creado por Admin
     const isRutaEdicionUbicacion = route.routeConfig?.path?.includes('editar-ubicacion/:id');
 
     if (isRutaEdicionUbicacion && userRol === 'POSTULANTE') {

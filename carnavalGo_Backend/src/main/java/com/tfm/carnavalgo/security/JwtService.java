@@ -22,7 +22,7 @@ import io.jsonwebtoken.security.Keys;
 @Service
 public class JwtService {
 
-    @Autowired(required = false) // Pude ser 'null' en producción
+    @Autowired(required = false) 
     Dotenv dotenv;
 
     private String getEnvVariable(String key) {
